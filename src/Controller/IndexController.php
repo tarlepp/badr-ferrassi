@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Model\Article;
 use App\Model\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,8 +35,8 @@ class IndexController
 }
 JSON;
 
-        $responseModel = $serializer->deserialize($json, Response::class, 'json');
+        $articles = $serializer->deserialize(json_encode(json_decode($json)->results), Article::class . '[]', 'json');
 
-        dd($responseModel);
+        dd($articles);
     }
 }
