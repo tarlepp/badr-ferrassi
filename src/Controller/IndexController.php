@@ -15,27 +15,14 @@ class IndexController
      */
     public function __invoke(SerializerInterface $serializer)
     {
-        $json = <<<JSON
-{
-  "header": {
-    "error": 0,
-    "message": "ok",
-    "next": 2
-  },
-  "results": [
-    {
-      "id": 17007,
-      "title": "test article title 1"
-    },
-    {
-      "id": 17008,
-      "title": "sample article 2"
-    }
-  ]
-}
-JSON;
+        $csv = <<<CSV
+id;title
+17007;test
+17008;sample ddasdf
+17008;sample test
+CSV;
 
-        $articles = $serializer->deserialize(json_encode(json_decode($json)->results), Article::class . '[]', 'json');
+        $articles = $serializer->deserialize($csv, Article::class . '[]', 'csv', ['csv_delimiter' => ';', 'csv_headers' => ['id', 'title']]);
 
         dd($articles);
     }

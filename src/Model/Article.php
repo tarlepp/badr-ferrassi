@@ -5,6 +5,6 @@ namespace App\Model;
 
 class Article
 {
-    public int $id = 0;
+    public string $id = '';
     public string $title = '';
 }
